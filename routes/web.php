@@ -20,8 +20,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('home', [HomeController::class, 'index'])->name('home');
+Route::redirect('/', '/login');
 
-Route::get('profile', ProfileController::class)->name('profile');
+Auth::routes();
 
-Route::resource('employees', EmployeeController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('profile', ProfileController::class)->name('profile');
+    Route::resource('employees', EmployeeController::class);
+});
