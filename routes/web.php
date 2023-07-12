@@ -116,3 +116,11 @@ Route::get('/delete-public-file', function (Request $request) {
     Storage::disk('public')->delete('LOsTO86O8oa8V9UHthlNpkXJXPSHwaOpnEezdnnZ.txt');
     return 'Deleted';
 });
+
+// Server-side Processing DataTables
+Route::get('getEmployees', [EmployeeController::class, 'getData'])->name('employees.getData');
+
+
+Route::get('exportExcel', [EmployeeController::class, 'exportExcel'])->name('employees.exportExcel');
+
+Route::get('exportPdf', [EmployeeController::class, 'exportPdf'])->name('employees.exportPdf');
